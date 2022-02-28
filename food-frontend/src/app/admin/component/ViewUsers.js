@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getCustomers, deleteCustomer } from "../action/adminActions";
 
+//JSX component to generate row for a user existance
 const UserItem = ({ user, index, deleteCustomer }) => {
   return (
     <tr>
@@ -11,6 +12,7 @@ const UserItem = ({ user, index, deleteCustomer }) => {
       <td>
         {user.roles
           .map((role) => {
+            //mapping ROLE_ADMIN to admin and ROLE_USER to user
             if (role === "ROLE_ADMIN") return "admin";
             return "user";
           })
@@ -18,10 +20,12 @@ const UserItem = ({ user, index, deleteCustomer }) => {
       </td>
       <td>
         {user.roles.includes("ROLE_ADMIN") ? (
+          //admin cannot delete another admin, so button is disabled
           <button className="btn btn-danger" disabled>
             Can't Delete Admin
           </button>
         ) : (
+          //admins can delete their customers
           <button
             className="btn btn-danger"
             onClick={(e) => {

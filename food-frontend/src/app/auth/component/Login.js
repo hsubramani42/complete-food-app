@@ -20,6 +20,7 @@ const Login = ({ login, auth: { isAuthenticated } }) => {
     login(formData);
   };
 
+  //redirect user to food dashboard in case if they are logged in
   if (isAuthenticated) {
     return <Navigate to="/food" />;
   }

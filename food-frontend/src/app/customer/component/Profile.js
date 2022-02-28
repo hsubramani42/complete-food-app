@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 import { updateProfie, deleteAccount } from "../../auth/action/authAction";
 import { setAlert } from "../../core/actions/alertAction";
 import store from "../../../redux/store";
-// rfcreduxp
+
+//component to update or delete customer profile
 export const Profile = ({
   auth: { userInfo },
   updateProfie,
   deleteAccount,
 }) => {
+  //loading data with existing information
   const [formData, setFormData] = useState({
     name: userInfo.name,
     email: userInfo.email,

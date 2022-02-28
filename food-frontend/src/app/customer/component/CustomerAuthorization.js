@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { setAlert } from "../../core/actions/alertAction";
 
+
+//pre authorization check that user is customer but not admin/non-auntenticated user
 export const CustomerAuthorization = ({
   auth: { isAuthenticated, userInfo, isLoading },
   Component,

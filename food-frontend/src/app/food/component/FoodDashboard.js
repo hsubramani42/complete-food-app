@@ -10,6 +10,8 @@ import {
 import { getAllFoods, getFoodByType } from "../actions/foodAction";
 import "../style/Dashboard.css";
 import store from "../../../redux/store/index";
+
+//JSX component to render when the foods list is empty
 const NoFoods = () => {
   return (
     <div className="text-center">
@@ -21,7 +23,9 @@ const NoFoods = () => {
   );
 };
 
+//JSX component to render food details into card in the dashboard
 const FoodItem = ({ food, isAdmin, cart }) => {
+  //state to hold the food item present in the cart or not
   const [inCart, setInCart] = useState(
     cart.filter((item) => item.id === food.id).length > 0 ? true : false
   );
@@ -42,6 +46,8 @@ const FoodItem = ({ food, isAdmin, cart }) => {
       </Link>
 
       {!isAdmin && (
+        //show the add to cart if food not present in the cart for non-admin user
+        //and show remove from cart if food present in the cart for non-admin user
         <button
           className={`btn btn-${inCart ? "danger" : "info"}`}
           onClick={(e) => {
@@ -69,12 +75,15 @@ export const FoodDashboard = ({
   fetchFromCart,
 }) => {
   useEffect(() => {
+    //update the cart
     if (localStorage.getItem("cart")) fetchFromCart();
+    //get all food items
     if (!foods) getAllFoods();
   }, [foods, getAllFoods, fetchFromCart]);
   const isAdmin =
     userInfo && userInfo.roles && userInfo.roles.includes("ROLE_ADMIN");
   const onChange = (e) => {
+    //fetch food details based on the type given by the user
     if (e.target.value === "All") {
       getAllFoods();
     } else {
@@ -102,6 +111,7 @@ export const FoodDashboard = ({
       </div>
 
       <div className="grid-container col-md-10 mt-3">
+        {/* display food details is foods are present else NoFood component is rendered */}
         {foods && foods.length > 0 ? (
           foods.map((food) => (
             <FoodItem food={food} isAdmin={isAdmin} key={food.id} cart={cart} />

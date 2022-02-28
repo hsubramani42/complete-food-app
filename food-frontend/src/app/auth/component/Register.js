@@ -37,16 +37,17 @@ export const Register = ({ auth: { isAuthenticated }, register }) => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    // add the values separated by comma to get the address
+    // adding the values separated by comma to get complete address
     var address =
       houseNo + ", " + street + ", " + city + ", " + state + ", " + zipCode;
     if (password === password2) {
       register({ name, email, password, address });
     } else {
+      //alert to show password does not match
       store.dispatch(setAlert("Passwords did not match", "danger"));
     }
   };
-
+  //redirect user to food dashboard page if user is authenticated
   if (isAuthenticated) {
     return <Navigate to="/food" />;
   }
@@ -103,8 +104,6 @@ export const Register = ({ auth: { isAuthenticated }, register }) => {
                   required
                 />
               </div>
-              {/* address contains the elements houseNo, street, city, state, zipCode */}
-              {/* align the input to either left or right */}
               <div className="left">
                 <div className="form-group">
                   <input
@@ -169,7 +168,6 @@ export const Register = ({ auth: { isAuthenticated }, register }) => {
                 />
               </div>
 
-              {/* checkbox to Agree to the privacy policy and terms & conditions */}
               <div className="form-group">
                 <input type="checkbox" required />
                 <small className="form-text text-muted">

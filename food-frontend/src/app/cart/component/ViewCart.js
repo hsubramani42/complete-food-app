@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { fetchFromCart, removeFromCart } from "../action/cartAction";
 export const ViewCart = ({ cart, fetchFromCart, removeFromCart }) => {
   let cartTotal = 0;
+  //iterating over the cart to find the total amount
   cart.forEach((item) => {
     cartTotal += item.foodCost;
   });
@@ -28,6 +29,7 @@ export const ViewCart = ({ cart, fetchFromCart, removeFromCart }) => {
           </tr>
         </thead>
         <tbody>
+          {/* iterating over cart and create a row for each food item  */}
           {cart.map((item, index) => (
             <tr key={index}>
               <td>{index + 1}</td>

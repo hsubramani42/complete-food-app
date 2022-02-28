@@ -15,6 +15,7 @@ export default (state = initialState, action) => {
       localStorage.setItem("cart", JSON.stringify([...state, payload]));
       return [...state, payload];
     case REMOVE_FROM_CART:
+      //removing food item from cart and updating the localStorage bysaving stringified data
       localStorage.setItem(
         "cart",
         JSON.stringify(state.filter((food) => food.id != payload))

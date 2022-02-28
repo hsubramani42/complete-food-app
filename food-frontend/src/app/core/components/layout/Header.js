@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../../auth/action/authAction";
 
+//menu items for admin
 const adminOptions = [
   {
     url: "/admin/users",
@@ -15,6 +16,7 @@ const adminOptions = [
   },
 ];
 
+//menu items for customer
 const customerOptions = [
   {
     url: "/cart",
@@ -26,6 +28,7 @@ const customerOptions = [
   },
 ];
 
+//menu items for non-authenticated users
 const unAuthOptions = [
   {
     url: "/cart",
@@ -46,6 +49,7 @@ export const Header = ({
   logout,
   cart,
 }) => {
+  //checking whether the user is admin or not
   const isAdmin =
     userInfo && userInfo.roles && userInfo.roles.includes("ROLE_ADMIN")
       ? true
@@ -90,7 +94,7 @@ export const Header = ({
                   key={option.menu}
                 >
                   {option.menu === "Cart"
-                    ? `Cart (${cart.length})`
+                    ? `Cart (${cart.length})` /* shows item count besides the cart menu */
                     : option.menu}
                 </Link>
               ))}

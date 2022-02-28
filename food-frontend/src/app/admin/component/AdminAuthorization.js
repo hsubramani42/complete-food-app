@@ -15,16 +15,19 @@ export const AdminAuthorization = ({
       userInfo && userInfo.roles && userInfo.roles.includes("ROLE_USER")
         ? true
         : false;
-    //wait for loading to complete
+    //redirect to login page if user is not authenticated
     if (!isAuthenticated) {
       setAlert("Login as admin to access the page!", "danger");
       navigate("/auth/login");
     } else if (isUser) {
+      //redirect to food dashboard page if user is not authorized to admin resources
       setAlert("Customers cannot access this page, Login as user!", "danger");
       navigate("/food");
     }
   }, [isAuthenticated, isLoading, navigate, setAlert, userInfo]);
+  //returning admin component to admin users
   if (isAuthenticated) return <Component />;
+  //return food dashboard page if user is not authorized to admin resources
   return <Navigate to="/food"></Navigate>;
 };
 

@@ -21,9 +21,11 @@ export const FoodForm = ({
   const { foodName, foodCost, foodPic, foodType, description } = formData;
 
   const { id } = useParams();
+  //check whether the action is add/ update based on the url matches
   const isCreate = useMatch("/admin/addFood");
   const navigate = useNavigate();
   useEffect(() => {
+    //load existing info if it is edit
     if (currentFood && !isCreate) {
       setFormData(currentFood);
     } else if (!currentFood && id) {

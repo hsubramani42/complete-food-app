@@ -34,10 +34,13 @@ function App() {
             <Route path="/auth/*" element={<AuthRouter />} />
             <Route path="/food/*" element={<FoodRouter />} />
             <Route path="/cart/*" element={<CartRouter />} />
+
+            {/* pre authroization for customer router for customer authorization */}
             <Route
               path="/customer/*"
               element={<CustomerAuthorization Component={CustomerRouter} />}
             />
+            {/* pre authroization for admin router for admin authorization */}
             <Route
               path="/admin/*"
               element={<AdminAuthorization Component={AdminRouter} />}

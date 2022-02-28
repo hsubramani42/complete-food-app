@@ -2,8 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 
-//   why we took alerts here
-//   alerts will bring the array
+//JSX component to render alerts into the appp
 export const Alert = ({ alerts }) => {
   return (
     alerts != null &&

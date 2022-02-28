@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
     case REGISTER_SUCCESS:
     case GET_PROFILE:
     case UPDATE_PROFILE:
+      //above actions have similar functionality of updating the user info into state of the store
       const { id, name, email, address, roles, token } = payload;
       return {
         ...state,
@@ -33,6 +34,7 @@ export default (state = initialState, action) => {
     case REGISTER_FAIL:
     case LOGIN_FAIL:
     case LOGOUT:
+      //above actions have similar functionality of resetting the state of the store
       return {
         ...state,
         token: null,

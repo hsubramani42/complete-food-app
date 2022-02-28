@@ -15,16 +15,19 @@ export const FoodDetails = ({
 }) => {
   const { id } = useParams();
   useEffect(() => {
+    //fetch food based on id in the url
     if (!currentFood) {
       getFood(id);
       fetchFromCart();
     }
   }, [currentFood, id, getFood]);
 
+  //check whether food item is in cart or not
   const [inCart, setInCart] = useState(
     cart.filter((item) => item.id === currentFood.id).length > 0 ? true : false
   );
 
+  //if food id is invalid
   if (!currentFood) {
     return (
       <div
@@ -77,6 +80,7 @@ export const FoodDetails = ({
             </Link>
           </div>
         ) : (
+          //if customer or non-authenticated show add to cart/remove from cart
           <button
             className={`btn btn-${inCart ? "danger" : "info"} mt-5`}
             onClick={(e) => {

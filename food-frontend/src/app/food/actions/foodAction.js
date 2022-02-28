@@ -9,6 +9,7 @@ import {
 import api from "../../../utils/api";
 import { setAlert } from "../../core/actions/alertAction";
 
+//Fetch all foods
 export const getAllFoods = () => async (dispatch) => {
   try {
     const res = await api().get("/food/");
@@ -18,6 +19,7 @@ export const getAllFoods = () => async (dispatch) => {
   }
 };
 
+//fetch food of specific type
 export const getFoodByType = (type) => async (dispatch) => {
   try {
     const res = await api().get("/food/" + type);
@@ -27,6 +29,7 @@ export const getFoodByType = (type) => async (dispatch) => {
   }
 };
 
+//update food item
 export const editFood = (formData, id) => async (dispatch) => {
   try {
     const res = await api().put(`/foods/${id}`, formData);
@@ -38,6 +41,7 @@ export const editFood = (formData, id) => async (dispatch) => {
   }
 };
 
+//get complete food details
 export const getFood = (id) => async (dispatch) => {
   try {
     const res = await api().get(`/foods/${id}`);
@@ -47,11 +51,13 @@ export const getFood = (id) => async (dispatch) => {
   }
 };
 
+//creating food
 export const createFood = (formData, navigate) => async (dispatch) => {
   try {
     const res = await api().post("/food", formData);
     dispatch({ type: ADD_FOOD, payload: res.data });
     navigate("/food");
+    //update foods store after adding food
     dispatch(getAllFoods());
     dispatch(setAlert("You Added Food Item successfully.", "success"));
   } catch (err) {
@@ -66,12 +72,15 @@ export const createFood = (formData, navigate) => async (dispatch) => {
   }
 };
 
+//deleting food
 export const deleteFood = (id) => async (dispatch) => {
   try {
     const res = await api().delete(`/foods/${id}`);
+    // action to delete food
     dispatch({ type: DELETE_FOOD, payload: null });
+    //action to update the foods array in store
     dispatch(getAllFoods());
-    dispatch(setAlert("Deleted customer", "danger"));
+    dispatch(setAlert("Deleted food", "danger"));
   } catch (error) {
     dispatch(setAlert(error.response.data.message, "danger"));
   }
